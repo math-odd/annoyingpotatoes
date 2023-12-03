@@ -124,20 +124,19 @@ public class BossShip extends EnemyShip {
     public void Attack(final Set<LaserBeam> laserBeams,
                        List<EnemyShip> enemyShipList,
                        final Set<Bullet> bullets) {
-        for (int i = 0; i < gameState.getLevel(); i++) {
-            int patternNum = (int)(Math.random() * 3);
-            switch (patternNum) {
-                case 0:
+        int patternNum = (int)(Math.random() * 3);
+        switch (patternNum) {
+            case 0:
+                for (int i = 0; i < gameState.getLevel(); i++)
                     beam(laserBeams);
-                    break;
-                case 1:
-                    summon(enemyShipList);
-                    break;
-                case 2:
-                    shootBigBullet(bullets);
+                break;
+            case 1:
+                summon(enemyShipList);
+                break;
+            case 2:
+                shootBigBullet(bullets);
             }
         }
-    }
 
     public void Move(){
         if (this.HP >= 0) {
