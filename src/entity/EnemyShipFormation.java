@@ -140,7 +140,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
     SpriteType spriteType;
     if (this.isBossStage){
       this.enemyShips.add(new ArrayList<EnemyShip>());
-      this.Boss = new BossShip(setXpos,positionY,SpriteType.EnemyShipA1,gameState,4);
+      this.enemyShips.add(new ArrayList<EnemyShip>());
+      this.Boss = new BossShip((int)(setXpos*10),positionY,SpriteType.EnemyShipA1,gameState,4);
       this.enemyShips.get(0).add(Boss);
       this.logger.info("Initializing " + nShipsWide + "x" + nShipsHigh + " BossShip formation in (" + positionX + "," + positionY + ")");
       this.shipCount++;
@@ -190,7 +191,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
     this.width = (this.nShipsWide - 1) * SEPARATION_DISTANCE + this.shipWidth;
     this.height = (this.nShipsHigh - 1) * SEPARATION_DISTANCE + this.shipHeight;
 
-    for (List<EnemyShip> column : this.enemyShips) this.shooters.add(column.get(column.size() - 1));
+    if (!isBossStage) for (List<EnemyShip> column : this.enemyShips) this.shooters.add(column.get(column.size() - 1));
 
     if (nShipsHigh > 5) moreDiff = true;
     if (moreDiff) complexSpeed = 8; else complexSpeed = 0;
@@ -316,17 +317,14 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
         }
         column.removeAll(destroyed);
       }
-
-      //Move
-      if (isBossStage){
-        Boss.Move();
+      if (isBossStage) {
+        for (EnemyShip splitBoss: this.enemyShips.get(0))
+          ((BossShip)splitBoss).Move();
+        return;
       }
-      else {
-        for (List<EnemyShip> column : this.enemyShips)
-          for (EnemyShip enemyShip : column) {
-            enemyShip.move(movementX, movementY);
-            enemyShip.update();
-          }
+      for (List<EnemyShip> column : this.enemyShips) for (EnemyShip enemyShip : column) {
+        enemyShip.move(movementX, movementY);
+        enemyShip.update();
       }
     }
   }
@@ -348,9 +346,11 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
         emptyColumns.add(this.enemyShips.indexOf(column));
       }
     }
-    for (int index : emptyColumns) {
-      this.enemyShips.remove(index);
-      logger.info("Removed column " + index);
+    if (!isBossStage) {
+      for (int index : emptyColumns) {
+        this.enemyShips.remove(index);
+        logger.info("Removed column " + index);
+      }
     }
 
     int leftMostPoint = 0;
@@ -376,12 +376,17 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
    * @param bullets
    *            Bullets set to add the bullet being shot.
    */
-  public final void shoot(final Set<Bullet> bullets) {
+  public final void shoot(final Set<Bullet> bullets,
+                          final Set<LaserBeam> laserBeams) {
     // For now, only ships in the bottom row are able to shoot.
     if (this.shootingCooldown.checkFinished()) {
       this.shootingCooldown.reset();
       if (isBossStage&&Boss!=null){
-        Boss.Attack();
+        for (EnemyShip enemyShip : this.enemyShips.get(1)){
+          enemyShip.shoot(bullets,shootingCooldown);
+          SoundManager.playSound("SFX/S_Enemy_Shoot", "EnemyShoot", false, false);
+        }
+        Boss.Attack(laserBeams, this.enemyShips.get(1));
         SoundManager.playSound("SFX/S_Enemy_Shoot", "EnemyShoot", false, false);
         return;
       }
@@ -567,6 +572,9 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
    * @return True when all ships have been destroyed.
    */
   public final boolean isEmpty() {
+    if (isBossStage){
+      return this.enemyShips.get(0).isEmpty() && this.enemyShips.get(1).isEmpty();
+    }
     return this.shipCount <= 0;
   }
 }
