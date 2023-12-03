@@ -71,4 +71,5 @@ public class Cooldown {
 	public final void timedown(final double percent){
 		this.duration=(int)(this.duration*(1-percent));
 	}
+
 }
