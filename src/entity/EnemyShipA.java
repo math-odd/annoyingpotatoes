@@ -6,13 +6,13 @@ import engine.GameState;
 import java.util.Set;
 
 public class EnemyShipA extends EnemyShip {
-  /** HPÀÇ ¹èÀ² */
+  /** HPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
   private final double HPPOWER = .8;
-  /** ÃÑ¾ËÀÇ ¼Óµµ ¹èÀ² */
+  /** ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ */
   private final double BULLETSPEEDPOWER = .5;
-  /** ½´ÆÃ Äð´Ù¿î ¹èÀ² */
+  /** ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¿ï¿½ ï¿½ï¿½ï¿½ï¿½ */
   private final double BULLETCOOLDOWN = .1;
-  /** Á¦°Å½Ã ¿Ã¶ó°¡´Â Á¡¼ö */
+  /** ï¿½ï¿½ï¿½Å½ï¿½ ï¿½Ã¶ó°¡´ï¿½ ï¿½ï¿½ï¿½ï¿½ */
   private final int POINT = 30;
 
   public EnemyShipA(
@@ -44,7 +44,8 @@ public class EnemyShipA extends EnemyShip {
         positionX + width / 2,
         positionY,
         (int) (super.BULLET_SPEED * BULLETSPEEDPOWER),
-        0
+        0,
+              DrawManager.SpriteType.EnemyBullet
       )
     );
     shootingCooldown.timedown(BULLETCOOLDOWN);

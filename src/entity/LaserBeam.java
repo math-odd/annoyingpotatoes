@@ -3,6 +3,7 @@ package entity;
 import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager;
+import engine.SoundManager;
 
 import java.awt.*;
 
@@ -42,6 +43,7 @@ public class LaserBeam extends Entity {
                     state = State.Attack;
                     count = 0;
                     changeColor(new Color(255, 255, 255, 255));
+                    SoundManager.playSound("SFX/S_Enemy_Shoot", "EnemyShoot", false, false);
                 }
             }
             else if (state == State.Attack) {

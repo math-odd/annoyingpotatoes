@@ -33,7 +33,7 @@ public class EnemyShipB extends EnemyShip {
     }
     public final void shoot(final Set<Bullet> bullets, Cooldown shootingCooldown) {
         bullets.add(BulletPool.getBullet(positionX
-                + width / 2, positionY, (int)(super.BULLET_SPEED * BULLETSPEEDPOWER),0));
+                + width / 2, positionY, (int)(super.BULLET_SPEED * BULLETSPEEDPOWER),0 , DrawManager.SpriteType.EnemyBullet));
         shootingCooldown.timedown(BULLETCOOLDOWN);
     }
 

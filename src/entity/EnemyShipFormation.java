@@ -386,8 +386,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
           enemyShip.shoot(bullets,shootingCooldown);
           SoundManager.playSound("SFX/S_Enemy_Shoot", "EnemyShoot", false, false);
         }
-        Boss.Attack(laserBeams, this.enemyShips.get(1));
-        SoundManager.playSound("SFX/S_Enemy_Shoot", "EnemyShoot", false, false);
+        Boss.Attack(laserBeams, this.enemyShips.get(1), bullets);
         return;
       }
       ArrayList<Boolean> shot = new ArrayList<>();
