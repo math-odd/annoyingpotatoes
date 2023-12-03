@@ -48,6 +48,14 @@ public class BossShip extends EnemyShip {
         split(enemyShipList);
     }
 
+    public final void update() {
+        if (this.animationCooldown.checkFinished()) {
+            this.animationCooldown.reset();
+            if (spriteType == DrawManager.SpriteType.EnemyShipA1) spriteType =
+                    DrawManager.SpriteType.EnemyShipA2; else spriteType =
+                    DrawManager.SpriteType.EnemyShipA1;
+        }
+
     /**
      * when Boss attack this function execute
      */
@@ -107,7 +115,7 @@ public class BossShip extends EnemyShip {
             for (int i = 1; i <= 36; i++) {
                 this.setPositionX(positionX += (int)(r * Math.sin((double) (i / (double) 36))));
                 this.setPositionY(positionY += (int)(r * Math.sin((double) (i / (double) 36))));
-                this.update();
+                DrawManager;
                 // 특정 조건에서 총도 쏘면 좋을 듯
             }
         }
