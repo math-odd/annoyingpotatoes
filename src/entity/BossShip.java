@@ -80,7 +80,8 @@ public class BossShip extends EnemyShip {
      * There is only one attack pattern yet
      */
     public void Attack(final Set<LaserBeam> laserBeams, List<EnemyShip> enemyShipList) {
-        beam(laserBeams,enemyShipList);
+        beam(laserBeams);
+        summon(enemyShipList);
     }
 
     public void Move(){
