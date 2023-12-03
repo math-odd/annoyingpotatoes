@@ -24,6 +24,7 @@ public class BossShip extends EnemyShip {
     private int TARY = this.positionY;
     private int Rotate, MoveType,Radius;
     private int summonTime;
+    private int sp_flag;
     public BossShip (final int positionX, final int positionY,
                      final DrawManager.SpriteType spriteType, final GameState gameState, int splitLevel){
         super(positionX, positionY, spriteType, gameState);
@@ -34,6 +35,7 @@ public class BossShip extends EnemyShip {
         this.splitLevel = splitLevel;
         this.spriteType = spriteType.BossShip;
         MoveType = -1;Rotate=0;Radius=0;summonTime=0;
+        this.sp_flag = 0;
     }
     private void summon(List<EnemyShip> enemyShipList){//enemyships.get(1) is Boss stage's small enemy
         if (summonTime>=3) {
@@ -62,10 +64,14 @@ public class BossShip extends EnemyShip {
         if (splitLevel <= 0) return;
 
         // Adjust the starting position based on BossShip width
-        currentX += BOSS_WIDTH * 2;
-        if (currentX < BOSS_WIDTH) currentX += BOSS_WIDTH;
-        if (WIDTH - BOSS_WIDTH < currentX) currentX -= BOSS_WIDTH;
-
+        if (sp_flag == 0)
+            currentX += BOSS_WIDTH * 2;
+        else
+            currentX -= BOSS_WIDTH * 2;
+        if (currentX < BOSS_WIDTH) {
+            currentX += BOSS_WIDTH; sp_flag = 0;}
+        if (WIDTH - BOSS_WIDTH < currentX) {
+            currentX -= BOSS_WIDTH; sp_flag = 1;}
         // Calculate the positions for the split BossShips
         int firstX = currentX - BOSS_WIDTH, secondX = currentX + BOSS_WIDTH;
 
