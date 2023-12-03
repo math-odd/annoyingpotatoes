@@ -1,5 +1,7 @@
 package entity;
 
+import engine.DrawManager;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -39,8 +41,8 @@ public final class BulletPool {
 	 *            0 for enemy, 1 for first player, 2 for second player.
 	 * @return Requested bullet.
 	 */
-	public static Bullet getBullet(final int positionX,
-			final int positionY, final int speed, final int shooter) {
+	public static Bullet getBullet(final int positionX, final int positionY,
+								   final int speed, final int shooter, final DrawManager.SpriteType spriteType) {
 		Bullet bullet;
 		if (pool.containsKey(shooter) && !pool.get(shooter).isEmpty()) {
 			bullet = pool.get(shooter).iterator().next();
@@ -48,11 +50,11 @@ public final class BulletPool {
 			bullet.setPositionX(positionX - bullet.getWidth() / 2);
 			bullet.setPositionY(positionY);
 			bullet.setSpeed(speed);
-			bullet.setSprite();
+			bullet.setSprite(spriteType);
 			// Will add a function to select the Bigger version and the base version later.
 //			bullet.setBiggerSprite();
 		} else {
-			bullet = new Bullet(positionX, positionY, speed, shooter);
+			bullet = new Bullet(positionX, positionY, speed, shooter, spriteType);
 			bullet.setPositionX(positionX - bullet.getWidth() / 2);
 		}
 		return bullet;

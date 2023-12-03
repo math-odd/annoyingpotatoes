@@ -6,13 +6,13 @@ import engine.GameState;
 import java.util.Set;
 
 public class EnemyShipA extends EnemyShip {
-  /** HP의 배율 */
+  /** HP's magnification */
   private final double HPPOWER = .8;
-  /** 총알의 속도 배율 */
+  /** the velocity magnification of a bullet */
   private final double BULLETSPEEDPOWER = .5;
-  /** 슈팅 쿨다운 배율 */
+  /** Shooting cool down magnification */
   private final double BULLETCOOLDOWN = .1;
-  /** 제거시 올라가는 점수 */
+  /** Scores that go up when you remove them */
   private final int POINT = 30;
 
   public EnemyShipA(
@@ -44,7 +44,8 @@ public class EnemyShipA extends EnemyShip {
         positionX + width / 2,
         positionY,
         (int) (super.BULLET_SPEED * BULLETSPEEDPOWER),
-        0
+        0,
+              DrawManager.SpriteType.EnemyBullet
       )
     );
     shootingCooldown.timedown(BULLETCOOLDOWN);

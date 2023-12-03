@@ -35,22 +35,35 @@ public class Bullet extends Entity {
 	 *            Speed of the bullet, positive or negative depending on
 	 *            direction - positive is down.
 	 */
-	public Bullet(final int positionX, final int positionY, final int speed, final int shooter) {
+	public Bullet(final int positionX, final int positionY,
+				  final int speed, final int shooter, final SpriteType spriteType) {
 		super(positionX, positionY, 3 * 2, 5 * 2, Color.WHITE);
-
 		this.speed = speed;
 		this.shooter = shooter;
-		setSprite();
+		setSprite(spriteType);
+		if (this.spriteType == SpriteType.BiggerBullet ||
+		this.spriteType == SpriteType.BiggerEnemyBullet) {
+			this.width = 6 * 2;
+			this.height = 10 * 2;
+		}
 	}
 
 	/**
 	 * Sets correct sprite for the bullet, based on speed.
 	 */
-	public final void setSprite() {
-		if (speed < 0)
-			this.spriteType = SpriteType.Bullet;
-		else
-			this.spriteType = SpriteType.EnemyBullet;
+	public final void setSprite(final SpriteType spriteType) {
+		if (speed < 0) {
+			if (spriteType == SpriteType.Bullet)
+				this.spriteType = SpriteType.Bullet;
+			else
+				this.spriteType = SpriteType.BiggerBullet;
+		}
+		else {
+			if (spriteType == SpriteType.EnemyBullet)
+				this.spriteType = SpriteType.EnemyBullet;
+			else
+				this.spriteType = SpriteType.BiggerEnemyBullet;
+		}
 	}
 	/**
 	 * Sets correct sprite for the Bigger bullet, based on speed.

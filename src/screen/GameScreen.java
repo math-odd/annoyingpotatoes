@@ -931,7 +931,7 @@ public class GameScreen extends Screen {
 							}
 						}
 						setBomb(false);
-						if (enemyShip.hasItem() && enemyShip.isDestroyed() && !enemyShipFormation.getBossStage()) {
+						if (enemyShip.hasItem() && enemyShip.isDestroyed()) {
 							items.add(new Item(enemyShip.getPositionX(), enemyShip.getPositionY(), enemyShip.getItemRange(), level));
 							SoundManager.playSound("SFX/S_Item_Create", "itemCreate", false, false);
 						}
@@ -1052,11 +1052,11 @@ public class GameScreen extends Screen {
 				speedBoosted = true;
 			}else if (per == 2) { //위아래화살표 연타 -> 총 세발
 				bullets.add(BulletPool.getBullet(ship.getPositionX(),
-						ship.getPositionY(), ship.getBULLET_SPEED(), 1));
+						ship.getPositionY(), ship.getBULLET_SPEED(), 1, DrawManager.SpriteType.Bullet));
 				bullets.add(BulletPool.getBullet(ship.getPositionX() + shipWidth/2,
-						ship.getPositionY(), ship.getBULLET_SPEED(), 1));
+						ship.getPositionY(), ship.getBULLET_SPEED(), 1, DrawManager.SpriteType.Bullet));
 				bullets.add(BulletPool.getBullet(ship.getPositionX() + shipWidth,
-						ship.getPositionY(), ship.getBULLET_SPEED(), 1));
+						ship.getPositionY(), ship.getBULLET_SPEED(), 1, DrawManager.SpriteType.Bullet));
 				this.logger.info("Three bullets");
 				this.bulletsShot1+=3;
 				this.bullet_count+=3;
@@ -1075,11 +1075,11 @@ public class GameScreen extends Screen {
 				speedBoosted = true;
 			}else if (per == 4) { //위아래화살표 연타 -> 총 세발
 				bullets.add(BulletPool.getBullet(ship2.getPositionX(),
-						ship2.getPositionY(), ship2.getBULLET_SPEED(), 2));
+						ship2.getPositionY(), ship2.getBULLET_SPEED(), 2, DrawManager.SpriteType.Bullet));
 				bullets.add(BulletPool.getBullet(ship2.getPositionX() + shipWidth/2,
-						ship2.getPositionY(), ship2.getBULLET_SPEED(), 2));
+						ship2.getPositionY(), ship2.getBULLET_SPEED(), 2, DrawManager.SpriteType.Bullet));
 				bullets.add(BulletPool.getBullet(ship2.getPositionX() + shipWidth,
-						ship2.getPositionY(), ship2.getBULLET_SPEED(), 2));
+						ship2.getPositionY(), ship2.getBULLET_SPEED(), 2, DrawManager.SpriteType.Bullet));
 				this.logger.info("Three bullets");
 				this.bulletsShot2+=3;
 				this.bullet_count2+=3;
