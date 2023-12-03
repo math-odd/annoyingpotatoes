@@ -108,7 +108,7 @@ public class EnemyShip extends Entity {
 
 	public void shoot(final Set<Bullet> bullets,Cooldown shootingCooldown) {
 		bullets.add(BulletPool.getBullet(positionX
-				+ width / 2, positionY, BULLET_SPEED, 0));
+				+ width / 2, positionY, BULLET_SPEED, 0, SpriteType.EnemyBullet));
 		shootingCooldown.timedown(0);
 
 	}
@@ -116,7 +116,7 @@ public class EnemyShip extends Entity {
 	/**
 	 * Destroys the ship, causing an explosion.
 	 */
-	public final void destroy() {
+	public void destroy() {
 		this.HP--;
 		if (this.HP <= 0) {
 			SoundManager.playSound("SFX/S_Enemy_Destroy_a", "Enemy_destroyed", false, false);

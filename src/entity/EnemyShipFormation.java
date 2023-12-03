@@ -386,8 +386,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
           enemyShip.shoot(bullets,shootingCooldown);
           SoundManager.playSound("SFX/S_Enemy_Shoot", "EnemyShoot", false, false);
         }
-        Boss.Attack(laserBeams, this.enemyShips.get(1));
-        SoundManager.playSound("SFX/S_Enemy_Shoot", "EnemyShoot", false, false);
+        Boss.Attack(laserBeams, this.enemyShips.get(1), bullets);
         return;
       }
       ArrayList<Boolean> shot = new ArrayList<>();
@@ -419,7 +418,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
       }
       for (int i = 0; i < this.enemyShips.get(0).size(); i++) {
         EnemyShip ship = enemyShips.get(0).get(i);
-        if (ship.equals(destroyedShip)) {
+        if (ship.equals(destroyedShip)&&Boss !=ship) {
           ship.destroy();
           try {//split Boss
             BossShip hitBoss = (BossShip) ship;
@@ -441,6 +440,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
         }
       }
     }
+      return;
     }
     for (List<EnemyShip> column : this.enemyShips) for (int i = 0; i < column.size(); i++) if (column.get(i).equals(destroyedShip)) {
       column.get(i).destroy();
