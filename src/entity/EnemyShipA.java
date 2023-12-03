@@ -6,13 +6,13 @@ import engine.GameState;
 import java.util.Set;
 
 public class EnemyShipA extends EnemyShip {
-  /** HP�� ���� */
+  /** HP's magnification */
   private final double HPPOWER = .8;
-  /** �Ѿ��� �ӵ� ���� */
+  /** the velocity magnification of a bullet */
   private final double BULLETSPEEDPOWER = .5;
-  /** ���� ��ٿ� ���� */
+  /** Shooting cool down magnification */
   private final double BULLETCOOLDOWN = .1;
-  /** ���Ž� �ö󰡴� ���� */
+  /** Scores that go up when you remove them */
   private final int POINT = 30;
 
   public EnemyShipA(

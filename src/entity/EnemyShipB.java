@@ -7,13 +7,13 @@ import engine.GameState;
 import java.util.Set;
 
 public class EnemyShipB extends EnemyShip {
-    /** HP의 배율 */
+    /** HP's magnification */
     private final double HPPOWER = .4;
-    /** 총알의 속도 배율 */
+    /** the velocity magnification of a bullet */
     private final double BULLETSPEEDPOWER = 1;
-    /** 슈팅 쿨다운 배율 */
+    /** Shooting cool down magnification */
     private final double BULLETCOOLDOWN = 0.2;
-    /** 제거시 올라가는 점수 */
+    /** Scores that go up when you remove them */
     private final int POINT = 10;
     public EnemyShipB(final int positionX, final int positionY,
                       final DrawManager.SpriteType spriteType, final GameState gameState) {
