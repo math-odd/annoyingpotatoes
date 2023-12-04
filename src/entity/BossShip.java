@@ -143,8 +143,8 @@ public class BossShip extends EnemyShip {
             if (MoveType==-1){
                 this.Radius = moveTrackSize(TARX, TARY);
                 moveTeleport();
-                MoveType = (int)(Math.random()*2);
-                if (MoveType==2)MoveType=1;
+                MoveType = (int)(Math.random()*3);
+                if (MoveType==3)MoveType=2;
                 Rotate=0;
             }
             switch (MoveType) {
@@ -152,6 +152,8 @@ public class BossShip extends EnemyShip {
                     moveCircle(); break;
                 case 1:
                     moveDiamond();break;
+                case 2:
+                    moveCross();break;
             }
         }
     }
@@ -172,8 +174,8 @@ public class BossShip extends EnemyShip {
     }
     public int moveTrackSize(int nowShipX, int nowShipY){
         double dValue = Math.random();
-        int minimX = Math.min((WIDTH - nowShipX - BOSS_WIDTH), nowShipX);
-        return (int)(dValue * Math.min(minimX, (HEIGHT - nowShipY - BOSS_HEIGHT)));
+        int minimX = Math.min((WIDTH - nowShipX - BOSS_WIDTH*2), nowShipX);
+        return (int)(dValue * Math.min(minimX, (HEIGHT - nowShipY - BOSS_HEIGHT*2)));
     }
     /**
      * move along the circle track
@@ -201,11 +203,11 @@ public class BossShip extends EnemyShip {
             if(isRight()){forward = 1;}
             else {forward = -1;}
             int i;
-            for (i = 1; i < r/10; i++){positionX += 10;this.update();}
-            for (i = 1; i < r/10; i++){positionX -= 10;this.update();}
-            for (i = 1; i < r/10; i++){positionY += forward*10;this.update();}
-            for (i = 1; i < r/5 - 1; i++){positionY -= forward*10;this.update();}
-            for (i = 1; i < r/10; i++){positionY += forward*10;this.update();}
+            for (i = 1; i < r/10; i++){this.setPositionX(positionX + 10);}
+            for (i = 1; i < r/10; i++){this.setPositionX(positionX - 10);}
+            for (i = 1; i < r/10; i++){this.setPositionY(positionY + forward*10);}
+            for (i = 1; i < r/5 - 1; i++){this.setPositionY(positionY - forward*10);}
+            for (i = 1; i < r/10; i++){this.setPositionY(positionY + forward*10);}
         }
     }
 
