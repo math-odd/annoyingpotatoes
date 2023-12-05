@@ -1,11 +1,12 @@
 package entity;
 
+import engine.DrawManager;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BulletTest {
-    Bullet bullet = new Bullet(50,50,10,5);
+    Bullet bullet = new Bullet(50,50,10,5, DrawManager.SpriteType.Bullet);
 
     @Test
     void setSpeed() {
